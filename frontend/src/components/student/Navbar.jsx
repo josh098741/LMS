@@ -12,7 +12,7 @@ function Navbar(){
 
     const {openSignIn} = useClerk()
     const {user} = useUser()
-    const {navigate} = useContext(AppContext)
+    const {navigate,isEducator} = useContext(AppContext)
 
     return(
         <div className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 ${isCourseListPage ? 'bg-white':'bg-cyan-100/70'}`}>
@@ -22,7 +22,7 @@ function Navbar(){
                     {
                         user && 
                         <>
-                            <button>Become Educator</button>
+                            <button onClick={() => navigate('/educator')}>{isEducator ? 'Educator Dashboard':'Become Educator'}</button>
                             | <Link to="/my-enrollments">My Enrollments</Link>
                         </>
                     }
@@ -38,7 +38,7 @@ function Navbar(){
                     {
                         user && 
                         <>
-                            <button>Become Educator</button>
+                            <button onClick={() => navigate('/educator')}>{isEducator ? 'Educator Dashboard':'Become Educator'}</button>
                             | <Link to="/my-enrollments">My Enrollments</Link>
                         </>
                     }
