@@ -4,6 +4,7 @@ import { AppContext } from "../../context/AppContext"
 import Loading from '../../components/student/Loading'
 import {assets} from '../../assets/assets'
 import humanizeDuration from "humanize-duration"
+import Footer from "../../components/student/Footer"
 
 function CourseDetail(){
 
@@ -11,16 +12,17 @@ function CourseDetail(){
 
     const [courseData, setCourseData] = useState(null)
     const [openSection, setOpenSection] = useState({})
-    const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState({})
+    const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false)
 
     const {allCourses,calculateRating,callculateNoOfLectures,calculateCourseDuration,calculateChapterTime,currency} = useContext(AppContext)
 
-    const fetchCourseData = async () => {
-       const findCourse = allCourses.find(course => course._id === id)
-       setCourseData(findCourse);
-    }
+    
 
     useEffect(() => {
+        const fetchCourseData = async () => {
+            const findCourse = allCourses.find(course => course._id === id)
+            setCourseData(findCourse);
+        }
         fetchCourseData()
     },[id,allCourses])
 
@@ -126,9 +128,21 @@ function CourseDetail(){
                             <p>{callculateNoOfLectures(courseData)} Lessons</p>
                         </div>
                     </div>
+                    <button className="md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium">{isAlreadyEnrolled ? 'Already Enrolled':'Enroll Now'}</button>
+                    <div className="pt-6">
+                        <p className="md:text-xl text-lg font-medium text-gray-800">What's in the course?</p>
+                        <ul className="ml-4 pt-2 text-sm md:text-default list-disc text-gray-500">
+                            <li>Lifetime Access with free updates</li>
+                            <li>Step-by-step, hands on project guidance</li>
+                            <li>Downloadable resources and source code</li>
+                            <li>Quizes to test your knowledge</li>
+                            <li>Certificate of completion</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>  
+        </div>
+        <Footer />  
         </>
         
     ): <Loading />
