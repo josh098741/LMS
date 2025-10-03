@@ -26,7 +26,7 @@ function CourseDetail(){
             setCourseData(findCourse);
         }
         fetchCourseData()
-    },[])
+    },[id,allCourses])
 
     const toggleSection = (index) => {
         setOpenSection((prev) => (
