@@ -2,6 +2,7 @@ import React,{useContext, useState, useEffect} from "react"
 import {useParams} from 'react-router-dom'
 import { AppContext } from "../../context/AppContext"
 import Loading from '../../components/student/Loading'
+import {assets} from '../../assets/assets'
 
 function CourseDetail(){
 
@@ -9,7 +10,7 @@ function CourseDetail(){
 
     const [courseData, setCourseData] = useState(null)
 
-    const {allCourses} = useContext(AppContext)
+    const {allCourses,calculateRating} = useContext(AppContext)
 
     const fetchCourseData = async () => {
        const findCourse = allCourses.find(course => course._id === id)
@@ -27,7 +28,22 @@ function CourseDetail(){
             <div className="absolute top-0 left-0 w-full h-sectionHeight -z-1 bg-gradient-to-b from-cyan-100/70"></div>
             <div className="max-w-xl z-10 text-gray-500">
                 <h1 className="md:text-course-details-heading-large text-course-details-heading-small font-semibold text-gray-800">{courseData.courseTitle}</h1>
-                <p dangerouslySetInnerHTML={{__html:courseData.courseDescription.slice(0,200)}}></p>
+                <p className="pt-4 mdd:text-base text-sm" dangerouslySetInnerHTML={{__html:courseData.courseDescription.slice(0,200)}}></p>
+
+                {/*review and rating*/}
+                <div className="flex items-center space-x-2 pt-3 pb-1 text-sm">
+                    <p>{calculateRating(courseData)}</p>
+                    <div className="flex">
+                        {[...Array(5)].map((_, i) => (<img key={i} src={i < Math.floor(calculateRating(courseData)) ? assets.star : assets.star_blank} alt='' className="w-3.5 h-3.5"/>))}
+                    </div>
+                    <p className="text-blue-600">{courseData.courseRatings.length} {courseData.courseRatings.length > 1 ? 'ratings':'rating'}</p>
+                    <p>
+                        {courseData.enrolledStudents.length} 
+                        {courseData.enrolledStudents.length > 1 ? 
+                        'students':'student'}
+                    </p>
+                </div>
+                <p>Course by <span className="text-blue-600 underline">Infinity Quest Labs</span></p>
             </div>
 
             {/*Right Column*/}
