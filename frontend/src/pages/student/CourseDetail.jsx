@@ -3,12 +3,14 @@ import {useParams} from 'react-router-dom'
 import { AppContext } from "../../context/AppContext"
 import Loading from '../../components/student/Loading'
 import {assets} from '../../assets/assets'
+import humanizeDuration from "humanize-duration"
 
 function CourseDetail(){
 
     const {id} = useParams()
 
     const [courseData, setCourseData] = useState(null)
+    const [openSection, setOpenSection] = useState({})
 
     const {allCourses,calculateRating,callculateNoOfLectures,calculateCourseDuration,calculateChapterTime} = useContext(AppContext)
 
@@ -20,6 +22,10 @@ function CourseDetail(){
     useEffect(() => {
         fetchCourseData()
     },[])
+
+    const toggleSection = (index) => {
+        setOpenSection((prev) => {...prev,[index]: !prev[index],})
+    }
 
     return courseData ? (
         <>
@@ -54,7 +60,23 @@ function CourseDetail(){
                                         <img src={assets.down_arrow_icon} alt="arrow icon" />
                                         <p className='font-medium md:text-base text-sm'>{chapter.chapterTitle}</p>
                                     </div>
-                                    <p>{chapter.chapterContent.length} Lectures - {calculateChapterTime(chapter)}</p>
+                                    <p className="text-sm md:text-default">{chapter.chapterContent.length} Lectures - {calculateChapterTime(chapter)}</p>
+                                </div>
+                                <div className="overflow-hidden transition-all duration-300 max-h-96">
+                                    <ul className="list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300">
+                                        {chapter.chapterContent.map((lecture,index) => (
+                                            <li key={index} className="flex items-start gap-2 py-1">
+                                                <img src={assets.play_icon} alt="play icon" />
+                                                <div className="flex items-center justify-between w-full text-gray-800 text-xs md:text-default">
+                                                    <p>{lecture.lectureTitle}</p>
+                                                    <div className="flex gap-2">
+                                                        {lecture.isPreviewFree && <p className="text-blue-500 cursor-pointer">Preview</p>}
+                                                        <p>{humanizeDuration(lecture.lectureDuration * 60 * 1000, {units:['h', 'm']})}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             </div>
                         ))}
