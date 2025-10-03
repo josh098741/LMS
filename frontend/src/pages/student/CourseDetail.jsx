@@ -21,7 +21,7 @@ function CourseDetail(){
 
     useEffect(() => {
         fetchCourseData()
-    },[])
+    },[id,allCourses])
 
     const toggleSection = (index) => {
         setOpenSection((prev) => (
@@ -38,7 +38,7 @@ function CourseDetail(){
                 <h1 className="md:text-course-details-heading-large text-course-details-heading-small font-semibold text-gray-800">{courseData.courseTitle}</h1>
                 <p className="pt-4 md:text-base text-sm" dangerouslySetInnerHTML={{__html:courseData.courseDescription.slice(0,200)}}></p>
 
-                {/*review and rating*/}
+                {/*review and rating*/} 
                 <div className="flex items-center space-x-2 pt-3 pb-1 text-sm">
                     <p>{calculateRating(courseData)}</p>
                     <div className="flex">
