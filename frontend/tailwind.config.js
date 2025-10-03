@@ -18,6 +18,9 @@ export default {
       },
       spacing : {
         'sectionHeight' : '500px'
+      },
+      maxWidth : {
+        'course-card' : '424px'
       }
     },
   },
