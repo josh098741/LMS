@@ -64,6 +64,7 @@ function Dashboard(){
                                             <td className="md:px-4 px-2 py-3 text-center hidden sm:table-cell">{index + 1}</td>
                                             <td className="md:px-4 px-2 py-3 flex items-center space-x-3">
                                                 <img src={item.student.imageUrl} alt="profile" className="w-9 h-9 rounded-full" />
+                                                <span className="truncate">{item.student.name}</span>
                                             </td>
                                         </tr>
                                     ))}
