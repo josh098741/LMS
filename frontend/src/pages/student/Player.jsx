@@ -2,9 +2,20 @@ import React from 'react'
 
 function Player(){
     return(
-        <div>
-            <h1>Player Page</h1>
-        </div>
+        <>
+            <div className="p-4 sm:p-10 flex flex-col-reverse md:grid md:grid-cols-2 gap-10 md:px-36">
+
+                {/*Left Column*/}
+                <div>
+                    <h2 className="text-xl font-semmibold">Course Structure</h2>
+                </div>
+
+                {/* Right Column */}
+                <div></div>
+
+            </div>
+        </>
+        
     );
 }
 
