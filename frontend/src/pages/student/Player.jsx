@@ -74,6 +74,10 @@ function Player(){
                             </div>
                         ))}
                     </div>
+
+                    <div className="flex items-center gap-2 py-3 mt-10">
+                        <h1 className="text-xl font-bold">Rate This Course</h1>
+                    </div>
                 </div>
 
                 {/* Right Column */}
