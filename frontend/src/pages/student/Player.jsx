@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import humanizeDuration from 'humanize-duration';
 import Youtube from 'react-youtube'
 import Footer from '../../components/student/Footer'
+import Rating from '../../components/student/Rating'
 
 function Player(){
 
@@ -77,6 +78,7 @@ function Player(){
 
                     <div className="flex items-center gap-2 py-3 mt-10">
                         <h1 className="text-xl font-bold">Rate This Course</h1>
+                        <Rating initialRating={0}/>
                     </div>
                 </div>
 
